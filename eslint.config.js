@@ -13,9 +13,7 @@ export default defineConfig([
     files: ['**/*.{ts,tsx}'],
     extends: [
       js.configs.recommended,
-      // 型情報を利用した TypeScript 向けの推奨設定に切り替え
       tseslint.configs.recommendedTypeChecked,
-      // React 用の追加プラグイン（TypeScript 向け推奨設定）
       reactX.configs['recommended-typescript'],
       reactDom.configs.recommended,
       reactHooks.configs.flat.recommended,
