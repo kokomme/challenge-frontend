@@ -1,0 +1,33 @@
+@layer components {
+  .title-item {
+    width: 240px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    border-radius: 0;
+    cursor: pointer;
+  }
+
+  .title-item.is-selected {
+    background: #F5F8FA;
+    border-radius: 4px;
+  }
+
+  .title-text {
+    width: 168px;
+    height: 24px;
+    line-height: 24px;
+    color: #1A1A1A;
+    font-weight: 400;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .title-item.is-selected .title-text {
+    color: #32A8F8;
+    font-weight: 700;
+  }
+}

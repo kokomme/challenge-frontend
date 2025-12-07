@@ -1,0 +1,8 @@
+@layer components {
+  .title-list {
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
