@@ -8,13 +8,11 @@
     box-sizing: border-box;
     border-radius: 4px;
     cursor: pointer;
-    /* Reset native button styles to use custom appearance */
     background: none;
     border: none;
     text-align: left;
   }
 
-  /* focus visible for keyboard users */
   .title-item:focus-visible {
     outline: 2px solid rgba(50,168,248,0.35);
     outline-offset: 2px;
