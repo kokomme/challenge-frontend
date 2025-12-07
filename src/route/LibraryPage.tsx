@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Branding from '../components/ui/branding/Branding';
-import TitleList from '../components/ui/title-list/TitleList';
+import TitleList from '../features/title-list/TitleList';
 import type { TitleItemData } from '../types/type';
 
 export default function LibraryPage() {
