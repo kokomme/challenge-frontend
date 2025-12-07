@@ -1,11 +1,6 @@
 import type { FC } from 'react';
 import './title-item.css';
-
-type TitleItemProps = {
-  title: string;
-  selected?: boolean;
-  onClick?: () => void;
-};
+import type { TitleItemProps } from './type';
 
 export const TitleItem: FC<TitleItemProps> = ({ title, selected = false, onClick }) => {
   return (

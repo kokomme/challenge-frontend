@@ -1,21 +1,19 @@
-import type { FC } from 'react';
 import TitleItem from './title-item/TitleItem';
 import './title-list.css';
+import type { TitleListProps } from './type';
 
-type TitleListProps = {
-  items: string[];
-  selectedIndex?: number;
-  onSelect?: (index: number) => void;
-};
-
-export const TitleList: FC<TitleListProps> = ({ items, selectedIndex = -1, onSelect }) => {
+export function TitleList<T extends { id: string | number; title: string }>({
+  items,
+  selectedIndex = -1,
+  onSelect,
+}: TitleListProps<T>) {
   return (
     <div className="title-list">
-      {items.map((t, i) => (
-        <TitleItem key={i} title={t} selected={i === selectedIndex} onClick={() => onSelect?.(i)} />
+      {items.map((item, i) => (
+        <TitleItem key={item.id} title={item.title} selected={i === selectedIndex} onClick={() => onSelect?.(i)} />
       ))}
     </div>
   );
-};
+}
 
 export default TitleList;
