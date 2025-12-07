@@ -1,0 +1,6 @@
+/* App-level container spacing: top 30px, left/right 40px */
+.app-container {
+  padding: 30px 40px 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+}
