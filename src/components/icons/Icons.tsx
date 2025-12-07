@@ -2,6 +2,7 @@ import saveSvg from '../../assets/icon/save.svg?raw';
 import editSvg from '../../assets/icon/edit.svg?raw';
 import doneSvg from '../../assets/icon/done.svg?raw';
 import cancelSvg from '../../assets/icon/cancel.svg?raw';
+import logoSvg from '../../assets/icon/logo.svg?raw';
 
 type IconProps = {
   className?: string;
@@ -29,9 +30,14 @@ export function CancelIcon(props: IconProps) {
   return <RawSvg svg={cancelSvg} {...props} />;
 }
 
+export function LogoIcon(props: IconProps) {
+  return <RawSvg svg={logoSvg} {...props} />;
+}
+
 export default {
   SaveIcon,
   EditIcon,
   DoneIcon,
   CancelIcon,
+  LogoIcon,
 };

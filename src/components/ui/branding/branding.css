@@ -1,0 +1,48 @@
+.branding {
+	width: 200px;
+	height: 32px;
+	background: #FFFFFF;
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+	gap: 4px;
+	padding: 0;
+}
+
+.branding__logo {
+	width: 32px;
+	height: 32px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 32px;
+}
+
+.branding__logo svg {
+	width: 32px;
+	height: 32px;
+	display: block;
+}
+
+.branding__title-wrap {
+	width: 168px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.branding__title {
+	font-family: 'GothamBold', Inter, Arial, sans-serif;
+	font-size: 24px;
+	color: #1A1A1A;
+	letter-spacing: 0;
+	line-height: 24px;
+	font-weight: 700;
+	width: 161px;
+	height: 24px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
