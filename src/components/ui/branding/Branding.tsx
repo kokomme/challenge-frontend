@@ -6,7 +6,7 @@ export const Branding: FC = () => {
 	return (
 		<div className="branding" role="img" aria-label="Brand">
 			<span className="branding__logo">
-				<LogoIcon className="branding__logo-svg" aria-hidden={false} />
+				<LogoIcon className="branding__logo-svg" aria-hidden={true} />
 			</span>
 		<div className="branding__title-wrap" style={{ width: '168px', height: '32px' }}>
 			<span className="branding__title" style={{ width: '161px', height: '24px' }}>ServiceName</span>
