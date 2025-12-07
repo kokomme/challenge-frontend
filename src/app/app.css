@@ -1,0 +1,8 @@
+/* App-level container spacing: top 30px, left/right 40px */
+@レイヤーコンポーネント{
+  .アプリコンテナ{
+    パディング:  30 px  40 px  0 ;
+    ボックスサイズ:ボーダーボックス;
+    最小高さ:  100 vh ;
+  }
+}
