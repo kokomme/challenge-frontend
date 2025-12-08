@@ -11,7 +11,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   const baseStyles =
-    'inline-flex flex-row items-center justify-center min-w-btn px-3 rounded font-medium transition-colors font-sans text-minimum gap-btn-gap'
+    'inline-flex items-center justify-center min-w-btn px-3 rounded font-medium transition-colors font-sans text-minimum flex-col'
 
   const sizeStyles: Record<string, string> = {
     md: 'h-btn-md w-btn-md',
