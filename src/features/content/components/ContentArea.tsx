@@ -1,13 +1,41 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Title from './title/Title';
 import TextArea from './text-area/TextArea';
-import EditButton from './edit-button/EditButton';
+import EditButton from '../../../components/ui/button/edit-button/EditButton';
+import EditActionButtons from './edit-action-buttons/EditActionButtons';
 import './ContentArea.css';
 
 const ContentArea: React.FC = () => {
-	const handleStartEdit = () => {
-		console.log('Edit clicked');
+	const [isEditingTitle, setIsEditingTitle] = useState(false);
+	const [isEditingTextArea, setIsEditingTextArea] = useState(false);
+
+	const handleStartEditTitle = () => {
+		setIsEditingTitle(true);
+	};
+
+	const handleCancelTitle = () => {
+		setIsEditingTitle(false);
+		console.log('Title edit cancelled');
+	};
+
+	const handleSaveTitle = () => {
+		setIsEditingTitle(false);
+		console.log('Title saved');
+	};
+
+	const handleStartEditTextArea = () => {
+		setIsEditingTextArea(true);
+	};
+
+	const handleCancelTextArea = () => {
+		setIsEditingTextArea(false);
+		console.log('TextArea edit cancelled');
+	};
+
+	const handleSaveTextArea = () => {
+		setIsEditingTextArea(false);
+		console.log('TextArea saved');
 	};
 
 	return (
@@ -15,7 +43,11 @@ const ContentArea: React.FC = () => {
 			<div className="content-header">
 				<Title>坊ちゃん</Title>
 				<div className="header-actions">
-					<EditButton onClick={handleStartEdit} />
+					{!isEditingTitle ? (
+						<EditButton onClick={handleStartEditTitle} />
+					) : (
+						<EditActionButtons onCancel={handleCancelTitle} onSave={handleSaveTitle} />
+					)}
 				</div>
 			</div>
 
@@ -26,7 +58,11 @@ const ContentArea: React.FC = () => {
 					</p>
 				</TextArea>
 				<div className="textarea-actions">
-					<EditButton onClick={handleStartEdit} />
+					{!isEditingTextArea ? (
+						<EditButton onClick={handleStartEditTextArea} />
+					) : (
+						<EditActionButtons onCancel={handleCancelTextArea} onSave={handleSaveTextArea} />
+					)}
 				</div>
 			</div>
 		</section>

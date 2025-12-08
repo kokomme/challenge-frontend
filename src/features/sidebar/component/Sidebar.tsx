@@ -5,7 +5,7 @@ import Branding from './branding/Branding.tsx';
 import TitleList from './title-list/TitleList.tsx';
 import EditableTitleList from './editable-title-list/EditableTitleList.tsx';
 import Button from '../../../components/ui/button/Button.tsx';
-import EditButton from '../../content/components/edit-button/EditButton';
+import EditButton from '../../../components/ui/button/edit-button/EditButton.tsx';
 import { DoneIcon, PlusIcon } from '../../../components/icons/Icons.tsx';
 import type { SidebarProps } from '../types/Sidebar.types.ts';
 
