@@ -9,59 +9,80 @@ import './ContentArea.css';
 const ContentArea: React.FC = () => {
 	const [isEditingTitle, setIsEditingTitle] = useState(false);
 	const [isEditingTextArea, setIsEditingTextArea] = useState(false);
+	const [title, setTitle] = useState('坊ちゃん');
+	const [text, setText] = useState('親譲りの無鉄砲で小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び降りて一週間ほど腰を抜かした事がある。');
+	const [tempTitle, setTempTitle] = useState('');
+	const [tempText, setTempText] = useState('');
 
-	const handleStartEditTitle = () => {
-		setIsEditingTitle(true);
-	};
-
-	const handleCancelTitle = () => {
-		setIsEditingTitle(false);
-		console.log('Title edit cancelled');
-	};
-
-	const handleSaveTitle = () => {
-		setIsEditingTitle(false);
-		console.log('Title saved');
-	};
-
-	const handleStartEditTextArea = () => {
-		setIsEditingTextArea(true);
-	};
-
-	const handleCancelTextArea = () => {
-		setIsEditingTextArea(false);
-		console.log('TextArea edit cancelled');
-	};
-
-	const handleSaveTextArea = () => {
-		setIsEditingTextArea(false);
-		console.log('TextArea saved');
+	const handleEdit = (type: 'title' | 'text', action: 'start' | 'cancel' | 'save') => {
+		if (type === 'title') {
+			if (action === 'start') {
+				setTempTitle(title);
+				setIsEditingTitle(true);
+			} else if (action === 'save') {
+				setTitle(tempTitle);
+				setIsEditingTitle(false);
+			} else {
+				setIsEditingTitle(false);
+			}
+		} else {
+			if (action === 'start') {
+				setTempText(text);
+				setIsEditingTextArea(true);
+			} else if (action === 'save') {
+				setText(tempText);
+				setIsEditingTextArea(false);
+			} else {
+				setIsEditingTextArea(false);
+			}
+		}
 	};
 
 	return (
 		<section className="content-area">
 			<div className="content-header">
-				<Title>坊ちゃん</Title>
+				{!isEditingTitle ? (
+					<Title>{title}</Title>
+				) : (
+					<input
+						type="text"
+						value={tempTitle}
+						onChange={(e) => setTempTitle(e.target.value)}
+						className="title-input"
+					/>
+				)}
 				<div className="header-actions">
 					{!isEditingTitle ? (
-						<EditButton onClick={handleStartEditTitle} />
+						<EditButton onClick={() => handleEdit('title', 'start')} />
 					) : (
-						<EditActionButtons onCancel={handleCancelTitle} onSave={handleSaveTitle} />
+						<EditActionButtons 
+							onCancel={() => handleEdit('title', 'cancel')} 
+							onSave={() => handleEdit('title', 'save')} 
+						/>
 					)}
 				</div>
 			</div>
 
 			<div className="textarea-wrapper">
-				<TextArea>
-					<p>
-						親譲りの無鉄砲で小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び降りて一週間ほど腰を抜かした事がある。
-					</p>
-				</TextArea>
+				{!isEditingTextArea ? (
+					<TextArea>
+						<p>{text}</p>
+					</TextArea>
+				) : (
+					<textarea
+						value={tempText}
+						onChange={(e) => setTempText(e.target.value)}
+						className="content-textarea-input"
+					/>
+				)}
 				<div className="textarea-actions">
 					{!isEditingTextArea ? (
-						<EditButton onClick={handleStartEditTextArea} />
+						<EditButton onClick={() => handleEdit('text', 'start')} />
 					) : (
-						<EditActionButtons onCancel={handleCancelTextArea} onSave={handleSaveTextArea} />
+						<EditActionButtons 
+							onCancel={() => handleEdit('text', 'cancel')} 
+							onSave={() => handleEdit('text', 'save')} 
+						/>
 					)}
 				</div>
 			</div>
