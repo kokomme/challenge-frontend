@@ -10,8 +10,18 @@ export function Button({
   disabled,
   ...props
 }: ButtonProps) {
+  // icon-only variant: render compact 24x24 button
+  if (variant === 'icon') {
+    const cls = ['btn-icon', className].filter(Boolean).join(' ');
+    return (
+      <button className={cls} disabled={disabled} {...props}>
+        {icon}
+      </button>
+    );
+  }
+
   const baseStyles =
-    'inline-flex items-center justify-center min-w-btn px-3 rounded font-medium transition-colors font-sans text-minimum flex-col'
+    'inline-flex items-center justify-center min-w-btn px-3 rounded font-medium transition-colors font-sans text-minimum flex-row';
 
   const sizeStyles: Record<string, string> = {
     md: 'h-btn-md w-btn-md',
@@ -24,7 +34,7 @@ export function Button({
     normal: 'bg-normal text-white hover:bg-normal-hover active:bg-normal-pressed disabled:opacity-50',
   };
 
-  const styles = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;
+  const styles = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`.trim();
 
   return (
     <button className={styles} disabled={disabled} {...props}>
