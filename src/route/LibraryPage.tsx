@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Sidebar from '../features/sidebar/Sidebar';
+import Sidebar from '../features/sidebar/component/Sidebar';
 import type { TitleItemData } from '../types/type';
 
 export default function LibraryPage() {

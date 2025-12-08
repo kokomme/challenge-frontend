@@ -1,10 +1,10 @@
 
 import './sidebar.css';
-import Branding from '../../components/ui/branding/Branding';
-import TitleList from './component/title-list/TitleList';
-import Button from '../../components/ui/button/Button';
-import { EditIcon } from '../../components/icons/Icons';
-import type { SidebarProps } from './type.ts';
+import Branding from './branding/Branding.tsx';
+import TitleList from './title-list/TitleList.tsx';
+import Button from '../../../components/ui/button/Button.tsx';
+import { EditIcon } from '../../../components/icons/Icons.tsx';
+import type { SidebarProps } from '../types/Sidebar.types.ts';
 
 export function Sidebar<T extends { id: string | number; title: string }>({
 	items,

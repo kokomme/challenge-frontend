@@ -1,6 +1,6 @@
-import TitleItem from './title-item/TitleItem';
-import './title-list.css';
-import type { TitleListProps } from './type';
+import TitleItem from '../title-item/TitleItem';
+import './TitleList.css';
+import type { TitleListProps } from './TitleList.types';
 
 export function TitleList<T extends { id: string | number; title: string }>({
   items,
