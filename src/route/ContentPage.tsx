@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Sidebar from '../features/sidebar/component/Sidebar';
 import ContentArea from '../features/content/components/ContentArea';
+import Footer from '../components/footer/Footer';
 import type { TitleItemData } from '../types/type';
 import './ContentPage.css';
 
@@ -29,6 +30,7 @@ export default function ContentPage() {
 
       <section className="main-column">
         <ContentArea />
+        <Footer />
       </section>
     </main>
   );
