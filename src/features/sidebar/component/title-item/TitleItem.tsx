@@ -1,6 +1,6 @@
 import type { FC } from 'react';
-import './title-item.css';
-import type { TitleItemProps } from './type';
+import './TitleItem.css';
+import type { TitleItemProps } from './TitleItem.types';
 
 export const TitleItem: FC<TitleItemProps> = ({ title, selected = false, onClick }) => {
   return (

@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import Branding from '../components/ui/branding/Branding';
-import TitleList from '../features/title-list/TitleList';
+import Sidebar from '../features/sidebar/component/Sidebar';
 import type { TitleItemData } from '../types/type';
 
 export default function LibraryPage() {
@@ -10,14 +9,19 @@ export default function LibraryPage() {
     { id: 3, title: 'Title C', body: 'Body C', createdAt: '2025-04-06T00:00:00.000Z', updatedAt: '2025-04-06T00:00:00.000Z' },
     { id: 4, title: 'Title D', body: 'Body D', createdAt: '2025-04-07T00:00:00.000Z', updatedAt: '2025-04-07T00:00:00.000Z' },
   ];
+
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="flex items-start gap-6">
-        <Branding />
-        <TitleList items={items} selectedIndex={selectedIndex} onSelect={setSelectedIndex} />
-      </div>
-    </div>
+    <main>
+      <Sidebar
+        items={items}
+        selectedIndex={selectedIndex}
+        onSelect={(i) => setSelectedIndex(i)}
+        onEdit={() => {
+          console.log('Edit clicked');
+        }}
+      />
+    </main>
   );
 }

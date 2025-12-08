@@ -1,6 +1,6 @@
 import type { FC } from 'react';
-import { LogoIcon } from '../../icons/Icons';
 import './branding.css';
+import { LogoIcon } from '../../../../components/icons/Icons';
 
 export const Branding: FC = () => {
 	return (
