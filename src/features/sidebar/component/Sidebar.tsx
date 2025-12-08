@@ -3,6 +3,7 @@ import './sidebar.css';
 import { useState } from 'react';
 import Branding from './branding/Branding.tsx';
 import TitleList from './title-list/TitleList.tsx';
+import EditableTitleList from './editable-title-list/EditableTitleList.tsx';
 import Button from '../../../components/ui/button/Button.tsx';
 import { EditIcon, DoneIcon, PlusIcon } from '../../../components/icons/Icons.tsx';
 import type { SidebarProps } from '../types/Sidebar.types.ts';
@@ -30,13 +31,23 @@ export function Sidebar<T extends { id: string | number; title: string }>({
 				<Branding />
 			</div>
 
-			<div className="sidebar__section">
-				<div className="sidebar__list">
+		<div className="sidebar__section">
+			<div className="sidebar__list">
+				{!editing ? (
 					<TitleList items={items} selectedIndex={selectedIndex} onSelect={onSelect} />
-				</div>
+				) : (
+					<EditableTitleList
+						items={items}
+						selectedIndex={selectedIndex}
+						onSelect={onSelect}
+						onDelete={(index) => {
+							// TODO: implement delete handler
+							console.log('Delete item at index:', index);
+						}}
+					/>
+				)}
 			</div>
-
-			<div className="sidebar__fab">
+		</div>			<div className="sidebar__fab">
 				{!editing ? (
 					<Button
 						size="md"
