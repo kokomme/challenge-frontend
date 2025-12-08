@@ -1,4 +1,5 @@
 import Button from '../../../../components/ui/button/Button';
+import type { MouseEvent } from 'react';
 import { DeleteIcon } from '../../../../components/icons/Icons';
 import './EditableTitleList.css';
 import type { EditableTitleListProps } from './EditableTitleList.types';
@@ -28,7 +29,7 @@ export function EditableTitleList<T extends { id: string | number; title: string
             <Button
               variant="icon"
               icon={<DeleteIcon />}
-              onClick={(e) => {
+              onClick={(e: MouseEvent<HTMLButtonElement>) => {
                 e.stopPropagation();
                 onDelete?.(i);
               }}
