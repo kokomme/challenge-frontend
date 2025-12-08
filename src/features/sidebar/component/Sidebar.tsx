@@ -47,7 +47,7 @@ export function Sidebar<T extends { id: string | number; title: string }>({
 						Edit
 					</Button>
 				) : (
-					<div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+					<div style={{ display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'space-evenly', width: '100%' }}>
 						<Button variant="secondary" size="md" icon={<PlusIcon />} onClick={() => { /* TODO: add new item handler */ }}>
 							New page
 						</Button>
