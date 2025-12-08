@@ -53,4 +53,9 @@
     height: 24px;
     display: block;
   }
+
+  .btn-vertical {
+    flex-direction: column;
+    gap: 0;
+  }
 }

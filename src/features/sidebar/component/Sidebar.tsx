@@ -1,9 +1,10 @@
 
 import './sidebar.css';
+import { useState } from 'react';
 import Branding from './branding/Branding.tsx';
 import TitleList from './title-list/TitleList.tsx';
 import Button from '../../../components/ui/button/Button.tsx';
-import { EditIcon } from '../../../components/icons/Icons.tsx';
+import { EditIcon, DoneIcon, PlusIcon } from '../../../components/icons/Icons.tsx';
 import type { SidebarProps } from '../types/Sidebar.types.ts';
 
 export function Sidebar<T extends { id: string | number; title: string }>({
@@ -12,6 +13,17 @@ export function Sidebar<T extends { id: string | number; title: string }>({
 	onSelect,
 	onEdit,
 }: SidebarProps<T>) {
+	const [editing, setEditing] = useState(false);
+
+	function handleStartEdit() {
+		setEditing(true);
+		if (onEdit) onEdit();
+	}
+
+	function handleDone() {
+		setEditing(false);
+		if (onEdit) onEdit();
+	}
 	return (
 		<aside className="sidebar">
 			<div className="sidebar__header">
@@ -25,14 +37,25 @@ export function Sidebar<T extends { id: string | number; title: string }>({
 			</div>
 
 			<div className="sidebar__fab">
-				<Button
-					size="md"
-					variant="primary"
-					icon={<EditIcon />}
-					onClick={onEdit}
-				>
-					Edit
-				</Button>
+				{!editing ? (
+					<Button
+						size="md"
+						variant="primary"
+						icon={<EditIcon />}
+						onClick={handleStartEdit}
+					>
+						Edit
+					</Button>
+				) : (
+					<div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+						<Button variant="secondary" size="md" icon={<PlusIcon />} onClick={() => { /* TODO: add new item handler */ }}>
+							New page
+						</Button>
+						<Button size="md" variant="primary" icon={<DoneIcon />} onClick={handleDone}>
+							Done
+						</Button>
+					</div>
+				)}
 			</div>
 		</aside>
 	);
