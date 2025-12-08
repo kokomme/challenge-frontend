@@ -1,0 +1,27 @@
+.content-page {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.sidebar-column {
+  flex: 0 0 320px;
+  width: 320px;
+}
+
+.main-column {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .content-page {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sidebar-column {
+    width: 100%;
+    flex: none;
+  }
+}
