@@ -10,11 +10,5 @@ const client = axios.create({
   },
 });
 
-client.interceptors.response.use(
-  (response) => response,
-  (error: AxiosError) => {
-    return Promise.reject(error instanceof Error ? error : new Error('Unknown error'));
-  }
-);
 
 export default client;
