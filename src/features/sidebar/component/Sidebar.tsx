@@ -1,31 +1,64 @@
 
 import './sidebar.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Branding from './branding/Branding.tsx';
 import TitleList from './title-list/TitleList.tsx';
 import EditableTitleList from './editable-title-list/EditableTitleList.tsx';
 import Button from '../../../components/ui/button/Button.tsx';
 import EditButton from '../../../components/ui/button/edit-button/EditButton.tsx';
 import { DoneIcon, PlusIcon } from '../../../components/icons/Icons.tsx';
-import type { SidebarProps } from '../types/Sidebar.types.ts';
+import { useContents } from '../../content/hooks/useContents';
+import { useSelectedContent } from '../../content/context/SelectedContentContext';
+import useCreateContent from '../../content/hooks/useCreateContent.ts';
 
-export function Sidebar<T extends { id: string | number; title: string }>({
-	items,
-	selectedIndex = -1,
-	onSelect,
-	onEdit,
-}: SidebarProps<T>) {
+export function Sidebar() {
+	const { data, isLoading, isError } = useContents();
+	const { selectedId, setSelectedId } = useSelectedContent();
 	const [editing, setEditing] = useState(false);
+	const [toastMessage, setToastMessage] = useState<string | null>(null);
+	const listItems = data?.map(item => ({ id: item.id, title: item.title })) ?? [];
 
-	function handleStartEdit() {
+	// 選択されていない場合、最初の項目を自動選択する
+	useEffect(() => {
+		if (selectedId == null && listItems.length > 0) {
+			const id = Number(listItems[0].id);
+			setSelectedId(id);
+		}
+	}, [selectedId, listItems, setSelectedId]);
+
+	const handleSelect = (id: number) => {
+		setSelectedId(id);
+	};
+
+	const createMutation = useCreateContent();
+	const { mutateAsync, isPending: isCreating } = createMutation;
+
+	// Toast cleanup to prevent memory leaks
+	useEffect(() => {
+		if (!toastMessage) return;
+		const timer = setTimeout(() => setToastMessage(null), 4000);
+		return () => clearTimeout(timer);
+	}, [toastMessage]);
+
+	const handleCreate = async () => {
+		try {
+			const created = await mutateAsync({ title: 'New Page', body: 'New Page' });
+			// 新しく作成された項目を選択する
+			setSelectedId(created.id);
+		} catch (err: unknown) {
+			const msg = err instanceof Error ? err.message : 'Failed to create';
+			setToastMessage(msg);
+		}
+	};
+
+	const handleStartEdit = () => {
 		setEditing(true);
-		if (onEdit) onEdit();
-	}
+	};
 
-	function handleDone() {
+	const handleDone = () => {
 		setEditing(false);
-		if (onEdit) onEdit();
-	}
+	};
+	
 	return (
 		<aside className="sidebar">
 			<div className="sidebar__header">
@@ -34,18 +67,18 @@ export function Sidebar<T extends { id: string | number; title: string }>({
 
 		<div className="sidebar__section">
 			<div className="sidebar__list">
-				{!editing ? (
-					<TitleList items={items} selectedIndex={selectedIndex} onSelect={onSelect} />
-				) : (
-					<EditableTitleList
-						items={items}
-						selectedIndex={selectedIndex}
-						onSelect={onSelect}
-						onDelete={(index) => {
-							// TODO: implement delete handler
-							console.log('Delete item at index:', index);
-						}}
-					/>
+				{isLoading ? (
+					<div style={{ padding: 16 }}>Loading...</div>
+								) : isError ? (
+					<div style={{ padding: 16, color: 'red' }}>Failed to load</div>
+								) : !editing ? (
+									<TitleList items={listItems} selectedId={selectedId} onSelect={handleSelect} />
+								) : (
+									<EditableTitleList
+										items={listItems}
+										selectedId={selectedId}
+										onSelect={handleSelect}
+									/>
 				)}
 			</div>
 		</div>			<div className="sidebar__fab">
@@ -53,7 +86,7 @@ export function Sidebar<T extends { id: string | number; title: string }>({
 					<EditButton onClick={handleStartEdit} />
 				) : (
 					<div style={{ display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'space-evenly', width: '100%' }}>
-						<Button variant="secondary" size="md" icon={<PlusIcon />} onClick={() => { /* TODO: add new item handler */ }}>
+						<Button variant="secondary" size="md" icon={<PlusIcon />} onClick={handleCreate} disabled={isCreating}>
 							New page
 						</Button>
 						<Button size="md" variant="primary" icon={<DoneIcon />} onClick={handleDone}>
@@ -62,6 +95,18 @@ export function Sidebar<T extends { id: string | number; title: string }>({
 					</div>
 				)}
 			</div>
+			{toastMessage && (
+				<div style={{
+					padding: 8,
+					color: '#fff',
+					background: 'rgba(0,0,0,0.75)',
+					borderRadius: 6,
+					margin: 12,
+					textAlign: 'center'
+				}}>
+					{toastMessage}
+				</div>
+			)}
 		</aside>
 	);
 }

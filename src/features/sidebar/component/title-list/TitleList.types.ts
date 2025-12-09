@@ -1,5 +1,5 @@
-export type TitleListProps<T extends { id: string | number; title: string }> = {
+export type TitleListProps<T extends { id: string | number; title: string | null }> = {
   items: T[];
-  selectedIndex?: number;
-  onSelect?: (index: number) => void;
+  selectedId?: number | null;
+  onSelect?: (id: number) => void;
 };
