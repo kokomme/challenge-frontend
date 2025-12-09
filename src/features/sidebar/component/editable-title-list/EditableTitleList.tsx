@@ -14,7 +14,19 @@ export function EditableTitleList<T extends { id:number; title: string | null }>
   const deleteContent = useDeleteContent();
 
   const onDelete = (id: number) => {
-    deleteContent.mutate(id);
+    deleteContent.mutate ( id , {​​ 
+      成功時: ( )  =>  {
+        if  (選択されたID  ===  id )  {
+          // 別の項目を自動選択するか、何も残っていない場合は選択をクリアします
+          const  residualItems  =  items.filter ( item = > item.id ! == id ) ;​​    
+           残りのアイテム数.長さ> 0の場合   
+            「?」を選択してください。( remainingItems [ 0 ] .id ) ;​
+          } それ以外 {
+            onSelect ?. ( null ) ;
+          }
+        }
+      }
+    } ) ;
   };
 
   return (
