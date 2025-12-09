@@ -42,7 +42,10 @@ export function Sidebar() {
 
 	const handleCreate = async () => {
 		try {
-			const created = await mutateAsync({ title: 'New Page', body: 'New Page' });
+			const created = await mutateAsync({ 
+				title: 'New Page', 
+				body: 'New Page Content （１０文字以上）' // 10文字以上必要
+			});
 			// 新しく作成された項目を選択する
 			setSelectedId(created.id);
 		} catch (err: unknown) {
