@@ -21,11 +21,10 @@ export function Sidebar() {
 
 	// 選択されていない場合、最初の項目を自動選択する
 	useEffect(() => {
-		if (selectedId == null && listItems.length > 0) {
-			const id = Number(listItems[0].id);
-			setSelectedId(id);
+		if (selectedId == null && data && data.length > 0) {
+			setSelectedId(data[0].id);
 		}
-	}, [selectedId, listItems, setSelectedId]);
+	}, [selectedId, data, setSelectedId]);
 
 	const handleSelect = (id: number) => {
 		setSelectedId(id);
@@ -97,14 +96,7 @@ export function Sidebar() {
 				)}
 			</div>
 			{toastMessage && (
-				<div style={{
-					padding: 8,
-					color: '#fff',
-					background: 'rgba(0,0,0,0.75)',
-					borderRadius: 6,
-					margin: 12,
-					textAlign: 'center'
-				}}>
+				<div className="sidebar__toast">
 					{toastMessage}
 				</div>
 			)}

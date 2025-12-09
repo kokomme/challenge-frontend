@@ -10,5 +10,12 @@ const client = axios.create({
   },
 });
 
+client.interceptors.response.use(
+  (response) => response,
+  (error: AxiosError) => {
+    // AxiosErrorの情報を保持してデバッグを容易にする
+    return Promise.reject(error);
+  }
+);
 
 export default client;

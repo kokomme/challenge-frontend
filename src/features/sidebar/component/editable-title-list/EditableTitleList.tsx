@@ -40,7 +40,7 @@ export function EditableTitleList<T extends { id:number; title: string | null }>
             onClick={() => onSelect?.(item.id)}
             aria-pressed={item.id === selectedId}
           >
-            <div className="editable-title-item__text">{item.title}</div>
+            <div className="editable-title-item__text">{item.title ?? 'Untitled'}</div>
           </button>
           <div className="editable-title-item__delete">
             <Button
@@ -50,7 +50,7 @@ export function EditableTitleList<T extends { id:number; title: string | null }>
                 e.stopPropagation();
                 onDelete?.(item.id);
               }}
-              aria-label={`Delete ${item.title}`}
+              aria-label={`Delete ${item.title ?? 'Untitled'}`}
             />
           </div>
         </div>
