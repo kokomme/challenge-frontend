@@ -1,5 +1,5 @@
-export type TitleItemProps<T extends { id: string | number; title: string | null }> = {
-  item: T[];
+export type TitleItemProps = {
+  title: string;
   selected?: boolean;
   onClick?: () => void;
 };

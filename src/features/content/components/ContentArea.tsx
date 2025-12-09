@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Title from './title/Title';
 import TextArea from './text-area/TextArea';
 import EditButton from '../../../components/ui/button/edit-button/EditButton';
@@ -7,7 +7,7 @@ import EditActionButtons from './edit-action-buttons/EditActionButtons';
 import './ContentArea.css';
 import { useContent } from '../hooks/useContent';
 import { useUpdateContent } from '../hooks/useUpdateContent';
-import { useSelectedContent } from '../context/SelectedContentContext';
+import { useSelectedContent } from '../context/useSelectedContent';
 import type { UpdateContentDTO } from '../../../types/type';
 
 const ContentArea: React.FC = () => {
@@ -17,17 +17,11 @@ const ContentArea: React.FC = () => {
 
 	const [isEditingTitle, setIsEditingTitle] = useState(false);
 	const [isEditingTextArea, setIsEditingTextArea] = useState(false);
-	const [title, setTitle] = useState('');
-	const [text, setText] = useState('');
 	const [tempTitle, setTempTitle] = useState('');
 	const [tempText, setTempText] = useState('');
 
-	useEffect(() => {
-		if (data) {
-			setTitle(data.title ?? '');
-			setText(data.body ?? '');
-		}
-	}, [data]);
+	const title = data?.title ?? '';
+	const text = data?.body ?? '';
 
 	const handleEdit = (type: 'title' | 'text', action: 'start' | 'cancel' | 'save') => {
 		if (type === 'title') {
@@ -37,7 +31,6 @@ const ContentArea: React.FC = () => {
 			} else if (action === 'save') {
 				const payload: UpdateContentDTO = { title: tempTitle, body: text };
 				if (selectedId != null) updateMutation.mutate({ id: selectedId, payload });
-				setTitle(tempTitle);
 				setIsEditingTitle(false);
 			} else {
 				setIsEditingTitle(false);
@@ -49,7 +42,6 @@ const ContentArea: React.FC = () => {
 			} else if (action === 'save') {
 				const payload: UpdateContentDTO = { title, body: tempText };
 				if (selectedId != null) updateMutation.mutate({ id: selectedId, payload });
-				setText(tempText);
 				setIsEditingTextArea(false);
 			} else {
 				setIsEditingTextArea(false);

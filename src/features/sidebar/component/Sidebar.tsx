@@ -8,7 +8,7 @@ import Button from '../../../components/ui/button/Button.tsx';
 import EditButton from '../../../components/ui/button/edit-button/EditButton.tsx';
 import { DoneIcon, PlusIcon } from '../../../components/icons/Icons.tsx';
 import { useContents } from '../../content/hooks/useContents';
-import { useSelectedContent } from '../../content/context/SelectedContentContext';
+import { useSelectedContent } from '../../content/context/useSelectedContent';
 import useCreateContent from '../../content/hooks/useCreateContent.ts';
 
 export function Sidebar() {
@@ -16,6 +16,7 @@ export function Sidebar() {
 	const { selectedId, setSelectedId } = useSelectedContent();
 	const [editing, setEditing] = useState(false);
 	const [toastMessage, setToastMessage] = useState<string | null>(null);
+	
 	const listItems = data?.map(item => ({ id: item.id, title: item.title })) ?? [];
 
 	// 選択されていない場合、最初の項目を自動選択する
@@ -86,7 +87,7 @@ export function Sidebar() {
 					<EditButton onClick={handleStartEdit} />
 				) : (
 					<div style={{ display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'space-evenly', width: '100%' }}>
-						<Button variant="secondary" size="md" icon={<PlusIcon />} onClick={handleCreate} disabled={isCreating}>
+						<Button variant="secondary" size="md" icon={<PlusIcon />} onClick={() => void handleCreate()} disabled={isCreating}>
 							New page
 						</Button>
 						<Button size="md" variant="primary" icon={<DoneIcon />} onClick={handleDone}>

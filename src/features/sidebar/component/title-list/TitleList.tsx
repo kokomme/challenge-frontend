@@ -12,7 +12,7 @@ export function TitleList<  T extends { id: number; title: string | null }>({
       {items.map((item) => (
         <TitleItem
           key={item.id}
-          title={item.title}
+          title={item.title ?? 'Untitled'}
           selected={item.id === selectedId}
           onClick={() => onSelect?.(item.id)}
         />

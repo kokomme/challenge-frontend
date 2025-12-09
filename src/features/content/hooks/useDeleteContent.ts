@@ -6,7 +6,7 @@ export const useDeleteContent = () => {
   return useMutation<void, Error, number>({
     mutationFn: (id: number) => deleteContent(id),
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ['contents'] });
+      void qc.invalidateQueries({ queryKey: ['contents'] });
     },
   });
 };

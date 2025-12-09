@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios, { type AxiosError } from 'axios';
 
-const baseURL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000';
+const baseURL: string = (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? 'http://localhost:3000';
 
 const client = axios.create({
   baseURL,
@@ -12,8 +12,8 @@ const client = axios.create({
 
 client.interceptors.response.use(
   (response) => response,
-  (error) => {
-    return Promise.reject(error);
+  (error: AxiosError) => {
+    return Promise.reject(error instanceof Error ? error : new Error('Unknown error'));
   }
 );
 

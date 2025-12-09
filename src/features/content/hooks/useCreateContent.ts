@@ -7,7 +7,7 @@ export const useCreateContent = () => {
   return useMutation<Content, Error, CreateContentDTO>({
     mutationFn: (payload: CreateContentDTO) => createContent(payload),
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ['contents'] });
+      void qc.invalidateQueries({ queryKey: ['contents'] });
     },
   });
 };
