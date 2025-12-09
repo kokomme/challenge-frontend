@@ -1,6 +1,6 @@
-export type EditableTitleListProps<T extends { id: string | number; title: string }> = {
+export type EditableTitleListProps<T extends { id: number; title: string | null }> = {
   items: T[];
-  selectedIndex?: number;
-  onSelect?: (index: number) => void;
-  onDelete?: (index: number) => void;
+  selectedId?: number | null;
+  onSelect?: (id: number) => void;
 };
+

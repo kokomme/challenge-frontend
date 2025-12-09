@@ -2,15 +2,20 @@ import TitleItem from '../title-item/TitleItem';
 import './TitleList.css';
 import type { TitleListProps } from './TitleList.types';
 
-export function TitleList<T extends { id: string | number; title: string }>({
+export function TitleList<  T extends { id: number; title: string | null }>({
   items,
-  selectedIndex = -1,
+  selectedId = null,
   onSelect,
 }: TitleListProps<T>) {
   return (
     <div className="title-list">
-      {items.map((item, i) => (
-        <TitleItem key={item.id} title={item.title} selected={i === selectedIndex} onClick={() => onSelect?.(i)} />
+      {items.map((item) => (
+        <TitleItem
+          key={item.id}
+          title={item.title ?? 'Untitled'}
+          selected={item.id === selectedId}
+          onClick={() => onSelect?.(item.id)}
+        />
       ))}
     </div>
   );
