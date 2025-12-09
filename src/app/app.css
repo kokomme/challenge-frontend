@@ -1,0 +1,7 @@
+/* App-level container spacing: top 30px, left/right 40px */
+@layer components {
+  .app-container {
+    box-sizing: border-box;
+    min-height: 100vh;
+  }
+}

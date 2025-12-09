@@ -1,0 +1,61 @@
+/* ボタンコンポーネント固有のスタイル */
+@layer components {
+  .h-btn-md {
+    height: 40px;
+  }
+  .h-btn-sm {
+    height: 40px;
+  }
+  
+  .w-btn-md {
+    width: 90px;
+  }
+  .w-btn-sm {
+    width: 40px;
+  }
+  
+  .min-w-btn {
+    min-width: 40px;
+  }
+  .max-w-btn {
+    max-width: 90px;
+  }
+  
+  .gap-btn-gap {
+    gap: 4px;
+  }
+
+  /* Icon-only button (24x24) */
+  .btn-icon {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 6px;
+    border: none;
+    transition: background-color 0.12s ease;
+    cursor: pointer;
+  }
+
+  .btn-icon:hover {
+    background: #E6E6E6;
+  }
+
+  .btn-icon:active {
+    background: #CCCCCC;
+  }
+
+  .btn-icon svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+
+  .btn-vertical {
+    flex-direction: column;
+    gap: 0;
+  }
+}

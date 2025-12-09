@@ -1,0 +1,43 @@
+@layer components {
+  .editable-title-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .editable-title-item {
+    display: flex;
+    align-items: center;
+    height: 44px;
+    padding: 0 10px;
+    border-radius: 4px;
+    gap: 8px;
+  }
+
+  .editable-title-item.is-selected {
+    background: #F5F8FA;
+  }
+
+  .editable-title-item__content {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .editable-title-item__text {
+    height: 24px;
+    line-height: 24px;
+    color: #1A1A1A;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .editable-title-item.is-selected .editable-title-item__text {
+    color: #32A8F8;
+    font-weight: 700;
+  }
+}
